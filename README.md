@@ -6,6 +6,7 @@ FitNesse SLIM protocol v0.3 implementation compatible with 3.11.
 
 It is forked from https://github.com/peterdemin/waferslim, to debug Python2 code in the original, and to add .wiki examples for decision table, query table, and script table.
 
+
 # Fixture Test Page Demo
 
 The test page is at waferslim\tests\fitnesse\pages\PythonTest.wiki
@@ -62,6 +63,14 @@ The corresponding code is waferslim\tests\fixtures\employee_list.py
 ```
 
 The corresponding code is waferslim\tests\fixtures\login.py
+
+
+# Installation
+
+Git clone this project, and install locally from the project:
+```
+pip install .
+```
 
 
 # Changes
