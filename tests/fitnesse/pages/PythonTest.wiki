@@ -1,0 +1,38 @@
+---
+Help: Test Python waferslim
+---
+!define TEST_SYSTEM {slim}
+!define SLIM_PORT {0}
+!path Python
+!define COMMAND_PATTERN {python3 -m waferslim.server --syspath %p }
+
+|import|
+|tests |
+
+!2 Decision table
+
+|Echo Fixture    |
+|value|get value?|
+|hello|hello     |
+
+!2 Query table
+
+|query:Employee List|test arg            |
+|name               |department |arg     |
+|Alice              |Engineering|test arg|
+|Bob                |Marketing  |test arg|
+
+|query:Employee List   |
+|name |department |arg |
+|Alice|Engineering|None|
+|Bob  |Marketing  |None|
+
+!2 Script table
+
+|script:Login Fixture|admin       |secret|
+|enter username      |admin              |
+|enter password      |secret             |
+|check               |is logged in|true  |
+|enter username      |someone            |
+|enter password      |secret             |
+|check               |is logged in|false |
