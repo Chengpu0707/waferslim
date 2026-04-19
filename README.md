@@ -34,6 +34,7 @@ The corresponding code is waferslim\tests\fixtures\echo_fixture.py
 
 ## Query table
 
+```
 |query:Employee List|test arg            |
 |name               |department |arg     |
 |Alice              |Engineering|test arg|
@@ -43,12 +44,14 @@ The corresponding code is waferslim\tests\fixtures\echo_fixture.py
 |name |department |arg |
 |Alice|Engineering|None|
 |Bob  |Marketing  |None|
+```
 
 The corresponding code is waferslim\tests\fixtures\employee_list.py
 
 
 ## Script table
 
+```
 |script:Login Fixture|admin       |secret|
 |enter username      |admin              |
 |enter password      |secret             |
@@ -56,6 +59,7 @@ The corresponding code is waferslim\tests\fixtures\employee_list.py
 |enter username      |someone            |
 |enter password      |secret             |
 |check               |is logged in|false |
+```
 
 The corresponding code is waferslim\tests\fixtures\login.py
 
