@@ -3,11 +3,11 @@ waferslim
 
 [![Build Status](https://travis-ci.org/peterdemin/waferslim.png?branch=travis)](https://travis-ci.org/peterdemin/waferslim)
 
-FitNesse SLIM protocol v0.3 implementation compatible with python 2.6+ and 3.2+
+FitNesse SLIM protocol v0.3 implementation compatible with 3.11
 
-## Changes
+# Changes
 
-### Python 3 compatibility fixes
+## Python 3 compatibility fixes
 
 **`converters.py`** — `Converter.to_string` referenced `unicode`, which does not exist in Python 3. Removed the redundant check; `str` in Python 3 is already unicode.
 
@@ -22,3 +22,57 @@ FitNesse SLIM protocol v0.3 implementation compatible with python 2.6+ and 3.2+
 **`tests/fixtures/employee_list.py`** — New Query Table fixture. Constructor accepts an optional `arg` (defaults to `None`). `query()` returns two rows (Alice/Engineering, Bob/Marketing) each exposing `name`, `department`, and `arg` columns.
 
 **`tests/fixtures/login.py`** — New Script Table fixture. Constructor takes expected `username` and `password`. `enter_username` / `enter_password` set the values to check, and `is_logged_in` returns `True` only when both match the constructor arguments.
+
+
+# Fixture
+
+The test page is at waferslim\tests\fitnesse\pages\PythonTest.wiki
+
+## Defines
+
+```
+!define TEST_SYSTEM {slim}
+!define SLIM_PORT {0}
+!path Python
+!define COMMAND_PATTERN {python3 -m waferslim.server --syspath %p }
+
+|import|
+|tests |
+```
+
+## Decision table
+
+```
+|Echo Fixture    |
+|value|get value?|
+|hello|hello     |
+```
+
+The corresponding code is waferslim\tests\fixtures\echo_fixture.py
+
+## Query table
+
+|query:Employee List|test arg            |
+|name               |department |arg     |
+|Alice              |Engineering|test arg|
+|Bob                |Marketing  |test arg|
+
+|query:Employee List   |
+|name |department |arg |
+|Alice|Engineering|None|
+|Bob  |Marketing  |None|
+
+The corresponding code is waferslim\tests\fixtures\employee_list.py
+
+
+## Script table
+
+|script:Login Fixture|admin       |secret|
+|enter username      |admin              |
+|enter password      |secret             |
+|check               |is logged in|true  |
+|enter username      |someone            |
+|enter password      |secret             |
+|check               |is logged in|false |
+
+The corresponding code is waferslim\tests\fixtures\login.py
