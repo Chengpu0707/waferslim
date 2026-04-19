@@ -216,11 +216,12 @@ class ExecutionContext(object):
 
     def target_for(self, instance, method_name):
         class_name = instance.__class__.__name__
-        method_name = self.aliases[class_name][method_name]
-        if hasattr(instance, method_name):
-            return getattr(instance, method_name)
-        else:
+        resolved = self.aliases.get(class_name, {}).get(method_name)
+        if resolved is None:
             return None
+        if hasattr(instance, resolved):
+            return getattr(instance, resolved)
+        return None
 
     def store_instance(self, name, value):
         ''' Add a name=value pair to the context instances '''

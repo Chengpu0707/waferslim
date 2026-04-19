@@ -122,9 +122,9 @@ def _pack_item(item):
     [iiiiii:llllll:item...]'''
     if isinstance(item, list):
         return _pack_item(pack(item))
-    if isinstance(item, str):
+    if isinstance(item, bytes):
         item = item.decode(BYTE_ENCODING, 'replace')
-    if isinstance(item, unicode):
+    if isinstance(item, str):
         return _ITEM_ENCODING % (len(item), _SEPARATOR, item)
     raise TypeError('%r is not a string' % item)
 
@@ -205,6 +205,8 @@ class RequestResponder(object):
         while remaining > 0:
             # Try 1k to work around incorrect message_length with utf-8
             data = self.request.recv(BUFFER_SIZE)
+            if not data:
+                break
             received = len(data)
             self.debug('Recv %s bytes...' % received)
             parts.append(data)

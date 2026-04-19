@@ -1,13 +1,10 @@
 class EchoFixture(object):
-    not_method = 'Should not be provided'
+    def __init__(self):
+        pass
 
-    def echo(self, value):
-        return value
+    def set_value(self, value):
+        self.value = value
 
-    @staticmethod
-    def static_echo(value):
-        return value
+    def get_value(self):
+        return self.value
 
-    @classmethod
-    def class_echo(cls, value):
-        return value

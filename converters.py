@@ -79,7 +79,7 @@ class Converter(object):
 
     def to_string(self, value):
         ''' Use default str() to convert from a value into a string '''
-        if isinstance(value, str) or isinstance(value, unicode):
+        if isinstance(value, str):
             return value
         return str(value)
 
