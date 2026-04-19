@@ -1,0 +1,25 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "waferslim"
+version = "1.0.2"
+description = "FitNesse SLIM protocol v0.3 implementation for Python 3"
+readme = "README.md"
+requires-python = ">=3.8"
+dependencies = ["six"]
+
+[project.scripts]
+waferslim = "waferslim.server:start_server"
+
+[tool.setuptools]
+packages = ["waferslim", "waferslim.tests", "waferslim.tests.fixtures"]
+
+[tool.setuptools.package-dir]
+waferslim = "."
+"waferslim.tests" = "tests"
+"waferslim.tests.fixtures" = "tests/fixtures"
+
+[tool.setuptools.package-data]
+waferslim = ["logging.conf"]
