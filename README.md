@@ -23,15 +23,25 @@ The test page is at waferslim\tests\fitnesse\pages\PythonTest.wiki
 |tests |
 ```
 
-## Decision table
+## Original table
 
-```
-|Echo Fixture    |
-|value|get value?|
-|hello|hello     |
-```
+|script|!-EchoFixture-!              |
+|check |echo       |hello|hello hello|
+|check |echo       |world|hello world|
+|check |static_echo|hello|hello      |
+|check |class_echo |hello|hello      |
 
 The corresponding code is waferslim\tests\fixtures\echo_fixture.py
+
+## Decision table
+
+|Division|true                          |
+|x       |y|divide?                     |
+|100     |5|20.0                        |
+|0       |5|0.0                         |
+|100     |0|EXCEPTION:=~/divide by zero/|
+
+The corresponding code is waferslim\tests\fixtures\division.py
 
 ## Query table
 
