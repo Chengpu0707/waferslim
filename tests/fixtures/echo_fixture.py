@@ -1,10 +1,14 @@
 class EchoFixture(object):
     def __init__(self):
-        pass
+        self.prefix = 'hello '
+        
+    def echo(self, value):
+        return self.prefix + value
 
-    def set_value(self, value):
-        self.value = value
+    @staticmethod
+    def static_echo(value):
+        return value
 
-    def get_value(self):
-        return self.value
-
+    @classmethod
+    def class_echo(cls, value):
+        return value
