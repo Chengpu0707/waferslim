@@ -92,3 +92,44 @@ pip install .
 **`tests/fixtures/login.py`** — New Script Table fixture. Constructor takes expected `username` and `password`. `enter_username` / `enter_password` set the values to check, and `is_logged_in` returns `True` only when both match the constructor arguments.
 
 
+#	How to step in a waferslim page in VsCode?
+
+The challenge is that FitNesse launches waferslim as a subprocess with stdin/stdout redirected, so pdb won't work. Use remote debugging via debugpy:
+
+##	Step 1 — Add debugpy to your fixture
+
+In the fixture file you want to debug (e.g. division.py):
+```
+  import debugpy
+  debugpy.listen(5678)
+  debugpy.wait_for_client()   # pauses until debugger attaches
+```
+Put it at the top of the method you want to break into, or in __init__.
+
+##	Step 2 — Attach VS Code
+In VS Code, add this to .vscode/launch.json:
+```
+  {
+    "type": "python",
+    "request": "attach",
+    "name": "Attach waferslim",
+    "connect": { "host": "localhost", "port": 5678 },
+    "pathMappings": [{
+      "localRoot": "${workspaceFolder}",
+      "remoteRoot": "."
+    }]
+  }
+```
+Press F5 → Attach waferslim. VS Code connects to port 5678, hits your breakpoint, and you can:
+  - F10 — step over
+  - F11 — step into
+  - Shift+F11 — step out
+  - F5 — continue
+
+##	Step 3 — Run the FitNesse test
+
+Go to http://localhost/LanguageSuite.PythonTest?test and run it. The test will hang waiting for a debugger to connect.
+
+##	Step 4 — Remove debugpy when done
+
+Delete the debugpy.listen / debugpy.wait_for_client() lines, otherwise the test will hang every time.
